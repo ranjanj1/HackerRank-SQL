@@ -1,0 +1,3 @@
+select distinct city from station where regexp_like(city, '^[^aeiou]', 'i');
+
+--substr(lower(city),1,1) not in ('a','e','i','o','u');
