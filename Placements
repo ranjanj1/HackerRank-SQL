@@ -1,0 +1,6 @@
+
+select s.name
+from 
+Students s , Friends f , Packages p, packages p1
+where s.ID = f.ID and f.ID = p.ID and f.friend_id = p1.id and p.salary < p1.salary 
+order by p1.salary
