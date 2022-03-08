@@ -1,0 +1,13 @@
+with challengecount as (
+select
+h.hacker_id, name, count(challenge_id) as ccount
+from
+hackers h , challenges c
+where h.hacker_id = c.hacker_id
+group by h.hacker_id, name
+)
+select hacker_id,name,ccount from challengecount where ccount =(select max(ccount) from challengecount)
+or 
+ccount in 
+(select ccount from challengecount group by ccount having count(ccount) = 1)
+order by ccount desc, hacker_id;
