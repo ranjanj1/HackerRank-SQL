@@ -1,0 +1,19 @@
+
+with  proj_start_date as(
+select 
+start_date, rank () over(order by start_date) as rank_start
+from Projects where start_date not in (select end_date from projects)
+),
+
+proj_end_date as (
+select 
+end_date, rank () over(order by end_date) as rank_end
+from Projects where end_date not in (select start_date from projects)
+)
+
+
+select start_date,end_date from proj_start_date, proj_end_date
+where rank_start = rank_end
+order by DATEDIFF(day,start_date,end_date), start_date
+
+
