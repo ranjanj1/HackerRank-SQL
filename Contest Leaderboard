@@ -1,0 +1,12 @@
+
+select hacker_id, name, sum(sc) from 
+(
+select h.hacker_id,name,challenge_id,max(score) sc
+from
+hackers h, submissions s
+where h.hacker_id = s.hacker_id
+group by h.hacker_id,name,challenge_id
+)
+group by hacker_id,name
+having sum(sc) != 0
+order by 3 desc, hacker_id;
