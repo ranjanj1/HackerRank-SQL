@@ -1,0 +1,13 @@
+
+
+select distinct
+h.hacker_id, name
+from 
+hackers h, Submissions s, challenges c, difficulty d
+where h.hacker_id = s.hacker_id
+and s.challenge_id = c.challenge_id
+and d.difficulty_level = c.difficulty_level and d.score = s.score
+group by h.hacker_id, name
+having count(*)>1
+order by count(h.hacker_id) desc, h.hacker_id
+;
